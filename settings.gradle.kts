@@ -1,0 +1,1 @@
+rootProject.name = "zisis.aristofanis.covid-project"
