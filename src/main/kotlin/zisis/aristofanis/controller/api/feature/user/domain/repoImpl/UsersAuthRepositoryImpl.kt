@@ -4,7 +4,6 @@ import com.auth0.jwk.JwkProvider
 import com.auth0.jwk.JwkProviderBuilder
 import com.auth0.jwt.JWT
 import com.auth0.jwt.algorithms.Algorithm
-import io.ktor.http.*
 import io.ktor.server.config.*
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.State
@@ -22,7 +21,7 @@ class UsersAuthRepositoryImpl(envConfig: ApplicationConfig, private val dataSour
 
 
 
-    val secret = envConfig.property("jwt.secret").getString()
+    private val secret = envConfig.property("jwt.secret").getString()
     private val issuer = envConfig.property("jwt.issuer").getString()
     private val audience = envConfig.property("jwt.audience").getString()
     private val myRealm = envConfig.property("jwt.realm").getString()
