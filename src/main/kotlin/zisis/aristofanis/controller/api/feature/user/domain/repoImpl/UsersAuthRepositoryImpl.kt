@@ -20,6 +20,8 @@ import java.util.concurrent.TimeUnit
 class UsersAuthRepositoryImpl(envConfig: ApplicationConfig, private val dataSource: UserAuthMongoDbDataSource) :
     UserAuthRepositoryContract {
 
+
+
     val secret = envConfig.property("jwt.secret").getString()
     private val issuer = envConfig.property("jwt.issuer").getString()
     private val audience = envConfig.property("jwt.audience").getString()
@@ -45,27 +47,17 @@ class UsersAuthRepositoryImpl(envConfig: ApplicationConfig, private val dataSour
     }
 
 
-    override suspend fun registerUser(params: Parameters): RegistrationResponse {
-        val email = params["email"] ?: "test"
-        val password = params["password"] ?: "test"
-        val name = params["name"] ?: "test"
-        val userDto = UserDto(email = email, password = password, name = name)
-        return when (val result = userInputValidation(params)) {
+    override suspend fun registerUser(userDto: UserDto): RegistrationResponse {
+        return when (val result = userInputValidation(userDto)) {
             is Result.Success -> validateDataSourceResponse(dataSource.createUser(userDto))
             is Result.Error -> RegistrationResponse(status = State.FAILED, error = result)
         }
     }
 
-    private fun userInputValidation(params: Parameters): Result<Unit> {
-        val email = params["email"]
-        val password = params["password"]
-        val name = params["name"]
-        val age = params["age"]?.toIntOrNull()
-        age?.let { if (it > 110) return UserExceptions.AgeTooHighException.toError() }
-        if (name.isNullOrEmpty()) return UserExceptions.NameEmptyException.toError()
-        if (password.isNullOrEmpty()) return UserExceptions.NameEmptyException.toError()
-        if (email.isNullOrEmpty()) return UserExceptions.NameEmptyException.toError()
-        if (name.length > 1019) return UserExceptions.NameToBigException.toError()
+    private fun userInputValidation(user: UserDto): Result<Unit> {
+        user.age?.let { if (it > 110) return UserExceptions.AgeTooHighException.toError() }
+        if (user.name.isEmpty()) return UserExceptions.NameEmptyException.toError()
+        if (user.name.length > 1019) return UserExceptions.NameToBigException.toError()
         return Result.Success(Unit)
     }
 

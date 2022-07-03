@@ -18,8 +18,8 @@ fun Route.authRouting(repository: UserAuthRepositoryContract) {
             call.respond(repository.authenticateUser(request.email, request.password))
         }
 
-        post<CreateUserResource> {
-            call.respond(repository.registerUser(call.receiveParameters()))
+        post<CreateUserResource> { request ->
+            call.respond(repository.registerUser(request.copy().toDto()))
         }
     }
 }
