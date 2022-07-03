@@ -13,13 +13,13 @@ data class CreateUserResource(
     val phonePrefix: String? = null,
     val gender: String? = null,
     val name: String,
-    val age: Int? = null,
+    val age: String? = null,
     val country: String? = null
 ) {
     fun toDto(): UserDto =
         UserDto(
             name = this.name,
-            age = this.age,
+            age = this.age?.toInt(),
             phonePrefix = this.phonePrefix,
             phoneNumber = this.phoneNumber,
             gender = this.gender,

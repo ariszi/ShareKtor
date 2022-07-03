@@ -1,14 +1,12 @@
 package zisis.aristofanis.controller.api.core.data
 
-import org.litote.kmongo.MongoOperator
-import org.litote.kmongo.coroutine.CoroutinePublisher
+import org.litote.kmongo.coroutine.CoroutineFindPublisher
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.runSuspendCatching
 
-inline fun <T : Any> CoroutinePublisher<T>.toResult(): Result<T> {
-    return runSuspendCatching {
-        MongoOperator.first as T
-    }
+suspend fun <T : Any> CoroutineFindPublisher<T>.toResult(): Result<T> {
+    val result = this.first()
+    return runSuspendCatching { (result ?: throw GenericException)  }
 }
 
 
