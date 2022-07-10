@@ -19,6 +19,6 @@ fun Application.configureRouting(database: CoroutineDatabase) {
 
     routing {
         userRouting(UsersRepositoryImpl(mongoDbUserDataSource))
-        authRouting(UsersAuthRepositoryImpl(envConfig, mongoDbUserAuthDataSource))
+        authRouting(UsersAuthRepositoryImpl(envConfig, mongoDbUserAuthDataSource, mongoDbUserDataSource))
     }
 }

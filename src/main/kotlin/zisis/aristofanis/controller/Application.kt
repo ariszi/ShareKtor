@@ -7,13 +7,8 @@ import zisis.aristofanis.controller.plugins.configureRouting
 import zisis.aristofanis.controller.plugins.pluginconfigs.configureDatabase
 
 fun main(args: Array<String>): Unit = EngineMain.main(args)
-
-fun Application.coreModule() {
-    configPlugIns()
-}
-
-fun Application.userModule() {
+fun Application.mainModule() {
     val database = configureDatabase()
-    configPlugIns()
+    configPlugIns(database)
     configureRouting(database)
 }

@@ -1,7 +1,6 @@
 package zisis.aristofanis.controller.api.feature.user.domain.models
 
 import kotlinx.serialization.Serializable
-import zisis.aristofanis.controller.api.core.domain.Dto
 import zisis.aristofanis.controller.api.feature.user.data.models.User
 
 @Serializable
@@ -15,7 +14,7 @@ data class UserDto(
     val name: String,
     val age: Int? = null,
     val country: String? = null
-): Dto {
+) {
     fun toDomain(): User =
         User(
             name = this.name,

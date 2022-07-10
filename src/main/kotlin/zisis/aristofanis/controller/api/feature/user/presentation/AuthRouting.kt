@@ -1,7 +1,6 @@
 package zisis.aristofanis.controller.api.feature.user.presentation
 
 import io.ktor.server.application.*
-import io.ktor.server.request.*
 import io.ktor.server.resources.post
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
@@ -15,7 +14,7 @@ fun Route.authRouting(repository: UserAuthRepositoryContract) {
 
     route(VERSION_1) {
         post<UserCredentials> { request ->
-            call.respond(repository.authenticateUser(request.email, request.password))
+            call.respond(repository.authenticateUser(request.toDto()))
         }
 
         post<CreateUserResource> { request ->

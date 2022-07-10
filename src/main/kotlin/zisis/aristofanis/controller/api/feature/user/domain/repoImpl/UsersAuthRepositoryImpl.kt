@@ -8,17 +8,24 @@ import io.ktor.server.config.*
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.State
 import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserAuthMongoDbDataSource
+import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserMongoDbDataSource
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
+import zisis.aristofanis.controller.api.feature.user.domain.models.CredentialsDto
 import zisis.aristofanis.controller.api.feature.user.domain.models.UserDto
 import zisis.aristofanis.controller.api.feature.user.domain.repoContracts.UserAuthRepositoryContract
+import zisis.aristofanis.controller.api.feature.user.presentation.models.UserPrincipal
 import zisis.aristofanis.controller.api.feature.user.presentation.responses.AuthenticationResponse
+import zisis.aristofanis.controller.api.feature.user.presentation.responses.PrincipalResponse
 import zisis.aristofanis.controller.api.feature.user.presentation.responses.RegistrationResponse
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-class UsersAuthRepositoryImpl(envConfig: ApplicationConfig, private val dataSource: UserAuthMongoDbDataSource) :
+class UsersAuthRepositoryImpl(
+    envConfig: ApplicationConfig,
+    private val userAuthDataSource: UserAuthMongoDbDataSource,
+    val userDataSource: UserMongoDbDataSource
+) :
     UserAuthRepositoryContract {
-
 
 
     private val secret = envConfig.property("jwt.secret").getString()
@@ -31,12 +38,12 @@ class UsersAuthRepositoryImpl(envConfig: ApplicationConfig, private val dataSour
         .rateLimited(10, 1, TimeUnit.MINUTES)
         .build()
 
-    override suspend fun authenticateUser(email: String, password: String): AuthenticationResponse {
+    override suspend fun authenticateUser(credentialsDto: CredentialsDto): AuthenticationResponse {
 
-        return when (val result = dataSource.retrieveUser(email, password)) {
+        return when (val result = userAuthDataSource.retrieveUser(credentialsDto)) {
             is Result.Success -> {
-                if (result.value.password == password)
-                    AuthenticationResponse(status = State.SUCCESS, token = tokenGeneration(email))
+                if (result.value.password == credentialsDto.password)
+                    AuthenticationResponse(status = State.SUCCESS, token = tokenGeneration(credentialsDto.email))
                 else UserExceptions.WrongPasswordException.toError()
             }
             is Result.Error -> {
@@ -48,8 +55,15 @@ class UsersAuthRepositoryImpl(envConfig: ApplicationConfig, private val dataSour
 
     override suspend fun registerUser(userDto: UserDto): RegistrationResponse {
         return when (val result = userInputValidation(userDto)) {
-            is Result.Success -> validateDataSourceResponse(dataSource.createUser(userDto))
+            is Result.Success -> validateDataSourceResponse(userAuthDataSource.createUser(userDto))
             is Result.Error -> RegistrationResponse(status = State.FAILED, error = result)
+        }
+    }
+
+    override suspend fun getUser(id: String): PrincipalResponse {
+        return when (val result = userDataSource.getUserById(id)) {
+            is Result.Success -> PrincipalResponse(status = State.SUCCESS, userPrincipal = UserPrincipal(result.value))
+            is Result.Error -> PrincipalResponse(status = State.FAILED, error = result)
         }
     }
 

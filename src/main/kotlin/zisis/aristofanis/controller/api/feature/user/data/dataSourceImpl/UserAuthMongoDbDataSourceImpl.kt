@@ -10,6 +10,7 @@ import zisis.aristofanis.controller.api.core.domain.validateMap
 import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserAuthMongoDbDataSource
 import zisis.aristofanis.controller.api.feature.user.data.models.User
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
+import zisis.aristofanis.controller.api.feature.user.domain.models.CredentialsDto
 import zisis.aristofanis.controller.api.feature.user.domain.models.UserDto
 
 
@@ -29,9 +30,9 @@ class UserAuthMongoDbDataSourceImpl(private val userCollection: CoroutineCollect
         }
     }
 
-    override suspend fun retrieveUser(email: String, password: String): Result<UserDto> {
+    override suspend fun retrieveUser(credentialsDto: CredentialsDto): Result<UserDto> {
         val searchQry = BasicDBObject();
-        searchQry["email"] = email
+        searchQry["email"] = credentialsDto.email
         return userCollection.find(searchQry).toResult().validateMap { it.toDto() }
             .mapError { UserExceptions.NoUserFoundException.toError() }
     }
