@@ -9,8 +9,7 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.resources.*
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import zisis.aristofanis.controller.api.core.domain.token.JWTController
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl.UserAuthMongoDbDataSourceImpl
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl.UserMongoDbDataSourceImpl
+import zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl.TransactionMongoDbDataSourceImpl
 import zisis.aristofanis.controller.api.feature.user.data.models.User
 import zisis.aristofanis.controller.plugins.pluginconfigs.authConfig.authenticationConfig
 import zisis.aristofanis.controller.plugins.pluginconfigs.configStatusPages
@@ -18,7 +17,7 @@ import zisis.aristofanis.controller.plugins.pluginconfigs.configStatusPages
 
 fun Application.configPlugIns(database: CoroutineDatabase) {
     val userCollection = database.getCollection<User>()
-    val userAuthMongoDbDataSource = UserAuthMongoDbDataSourceImpl(userCollection)
+    val userAuthMongoDbDataSource = TransactionMongoDbDataSourceImpl(userCollection)
     val userMongoDbDataSource = UserMongoDbDataSourceImpl(userCollection)
     val envConfig = environment.config
     val jwtController = JWTController(envConfig)

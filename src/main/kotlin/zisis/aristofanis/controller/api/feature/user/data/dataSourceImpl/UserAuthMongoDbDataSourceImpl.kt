@@ -8,14 +8,14 @@ import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.mapError
 import zisis.aristofanis.controller.api.core.domain.onSuccess
 import zisis.aristofanis.controller.api.core.domain.validateMap
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserAuthMongoDbDataSource
+import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.TransactionMongoDbDataSource
 import zisis.aristofanis.controller.api.feature.user.data.models.User
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
 import zisis.aristofanis.controller.api.feature.user.domain.models.CredentialsDto
 import zisis.aristofanis.controller.api.feature.user.domain.models.UserDto
 
 
-class UserAuthMongoDbDataSourceImpl(private val userCollection: CoroutineCollection<User>) : UserAuthMongoDbDataSource {
+class UserAuthMongoDbDataSourceImpl(private val userCollection: CoroutineCollection<User>) : TransactionMongoDbDataSource {
 
 
     override suspend fun createUser(userDto: UserDto): Result<UserDto> {
