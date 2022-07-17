@@ -3,6 +3,7 @@ package zisis.aristofanis.controller.plugins
 import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import org.litote.kmongo.coroutine.CoroutineDatabase
+import zisis.aristofanis.controller.api.core.domain.token.JWTController
 import zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl.UserAuthMongoDbDataSourceImpl
 import zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl.UserMongoDbDataSourceImpl
 import zisis.aristofanis.controller.api.feature.user.data.models.User
@@ -16,9 +17,10 @@ fun Application.configureRouting(database: CoroutineDatabase) {
     val mongoDbUserDataSource = UserMongoDbDataSourceImpl(userCollection)
     val mongoDbUserAuthDataSource = UserAuthMongoDbDataSourceImpl(userCollection)
     val envConfig = environment.config
+    val jwtController = JWTController(envConfig)
 
     routing {
         userRouting(UsersRepositoryImpl(mongoDbUserDataSource))
-        authRouting(UsersAuthRepositoryImpl(envConfig, mongoDbUserAuthDataSource, mongoDbUserDataSource))
+        authRouting(UsersAuthRepositoryImpl(jwtController, mongoDbUserAuthDataSource, mongoDbUserDataSource))
     }
 }

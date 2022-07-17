@@ -8,5 +8,5 @@ data class FailureResponse(
     override val status: State = State.FAILED,
     override val message: String = "Something went wrong",
     override val error: Result.Error? = null,
-    val token: String? = null
+    override val payload: Any? = null,
 ) : Response

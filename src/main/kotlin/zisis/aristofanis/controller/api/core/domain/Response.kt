@@ -7,6 +7,7 @@ interface Response {
     val status: State
     val message: String
     val error: Result.Error?
+    val payload: Any?
 }
 
 /**

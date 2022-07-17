@@ -6,7 +6,7 @@ import zisis.aristofanis.controller.api.feature.user.domain.models.UserDto
 
 interface UserAuthMongoDbDataSource {
 
-    suspend fun createUser(user: UserDto): Result<UserDto>
+    suspend fun createUser(userDto: UserDto): Result<UserDto>
 
     suspend fun retrieveUser(credentialsDto: CredentialsDto): Result<UserDto>
 

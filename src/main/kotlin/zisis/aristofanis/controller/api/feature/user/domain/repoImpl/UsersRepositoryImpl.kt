@@ -11,14 +11,14 @@ class UsersRepositoryImpl(private val dataSource: UserMongoDbDataSource) : UserR
 
     override suspend fun getUser(id: String): UserResponse {
         return when (val result = dataSource.getUserById(id)) {
-            is Result.Success -> UserResponse(usersDto = UsersDto(listOf(result.value)))
+            is Result.Success -> UserResponse(payload = UsersDto(listOf(result.value)))
             is Result.Error -> UserResponse(status = State.FAILED, error = result)
         }
     }
 
     override suspend fun getUsers(): UserResponse {
         return when (val result = dataSource.getAllUsers()) {
-            is Result.Success -> UserResponse(usersDto = (result.value))
+            is Result.Success -> UserResponse(payload = (result.value))
             is Result.Error -> UserResponse(status = State.FAILED, error = result)
         }
     }

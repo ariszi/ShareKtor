@@ -1,32 +1,30 @@
 package zisis.aristofanis.controller.plugins.pluginconfigs.authConfig
 
-import com.auth0.jwt.JWT
-import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.http.*
 import io.ktor.server.auth.*
 import io.ktor.server.auth.jwt.*
-import io.ktor.server.config.*
 import io.ktor.server.response.*
-import zisis.aristofanis.controller.api.feature.user.domain.repoContracts.UserAuthRepositoryContract
+import zisis.aristofanis.controller.api.core.domain.Result
+import zisis.aristofanis.controller.api.core.domain.token.JWTController
+import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserMongoDbDataSource
+import zisis.aristofanis.controller.api.feature.user.presentation.models.UserPrincipal
 
-fun AuthenticationConfig.authenticationConfig(envConfig: ApplicationConfig, repository: UserAuthRepositoryContract) {
+fun AuthenticationConfig.authenticationConfig(jwtController: JWTController, dataSource: UserMongoDbDataSource) {
 
-    val secret = envConfig.property("jwt.secret").getString()
-    val issuer = envConfig.property("jwt.issuer").getString()
-    val audience = envConfig.property("jwt.audience").getString()
-    val myRealm = envConfig.property("jwt.realm").getString()
 
-    jwt("jwt-auth") {
-        realm = myRealm
-        verifier(
-            JWT
-            .require(Algorithm.HMAC256(secret))
-            .withAudience(audience)
-            .withIssuer(issuer)
-            .build())
+    jwt() {
+
+        verifier(jwtController.verifyToken())
 
         validate { credential ->
-            repository.getUser(credential.payload.getClaim("id").toString()).userPrincipal
+
+            val id = credential.payload.getClaim("id").asString()
+
+            when (val user = dataSource.getUserById(id)) {
+                is Result.Success -> UserPrincipal(user.value)
+                is Result.Error -> null
+
+            }
         }
         challenge { defaultScheme, realm ->
             call.respond(HttpStatusCode.Unauthorized, "Token is not valid or has expired")

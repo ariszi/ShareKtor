@@ -5,7 +5,7 @@ import zisis.aristofanis.controller.api.feature.user.data.models.User
 
 @Serializable
 data class UserDto(
-    val id: String? = null,
+    val id: String = "",
     val email: String,
     val password: String,
     val phoneNumber: String? = null,

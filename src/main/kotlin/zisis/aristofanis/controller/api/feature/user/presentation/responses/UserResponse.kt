@@ -9,5 +9,5 @@ data class UserResponse(
     override val status: State = State.SUCCESS,
     override val message: String = "Authorization response",
     override val error: Result.Error? = null,
-    val usersDto: UsersDto? = null
+    override val payload: UsersDto? = null
 ) : Response

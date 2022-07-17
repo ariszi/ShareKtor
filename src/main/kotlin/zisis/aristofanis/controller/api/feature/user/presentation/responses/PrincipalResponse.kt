@@ -9,5 +9,5 @@ data class PrincipalResponse(
     override val status: State,
     override val message: String = "Authorization response",
     override val error: Result.Error? = null,
-    val userPrincipal: UserPrincipal? = null
+    override val payload: UserPrincipal? = null
 ) : Response
