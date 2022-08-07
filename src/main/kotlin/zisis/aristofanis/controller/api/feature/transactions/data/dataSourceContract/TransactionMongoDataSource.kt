@@ -3,7 +3,7 @@ package zisis.aristofanis.controller.api.feature.transactions.data.dataSourceCon
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto
 
-interface TransactionMongoDbDataSource {
+interface TransactionMongoDataSource {
 
    suspend fun createTransaction(transactionDto: TransactionDto): Result<TransactionDto>
 

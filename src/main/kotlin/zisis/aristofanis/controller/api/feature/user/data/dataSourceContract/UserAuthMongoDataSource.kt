@@ -4,7 +4,7 @@ import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.feature.user.domain.models.CredentialsDto
 import zisis.aristofanis.controller.api.feature.user.domain.models.UserDto
 
-interface UserAuthMongoDbDataSource {
+interface UserAuthMongoDataSource {
 
     suspend fun createUser(userDto: UserDto): Result<UserDto>
 

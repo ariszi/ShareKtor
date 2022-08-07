@@ -9,16 +9,16 @@ import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.mapError
 import zisis.aristofanis.controller.api.core.domain.onSuccess
 import zisis.aristofanis.controller.api.core.domain.validateMap
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserAuthMongoDbDataSource
+import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserAuthMongoDataSource
 import zisis.aristofanis.controller.api.feature.user.data.models.User
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
 import zisis.aristofanis.controller.api.feature.user.domain.models.CredentialsDto
 import zisis.aristofanis.controller.api.feature.user.domain.models.UserDto
 
 
-class UserAuthMongoDbDataSourceImpl(private val userCollection: CoroutineCollection<User>) : UserAuthMongoDbDataSource {
+class UserAuthMongoDataSourceImpl(private val userCollection: CoroutineCollection<User>) : UserAuthMongoDataSource {
 
-    val logger = LoggerFactory.getLogger(UserAuthMongoDbDataSourceImpl::class.java)
+    val logger = LoggerFactory.getLogger(UserAuthMongoDataSourceImpl::class.java)
     override suspend fun createUser(userDto: UserDto): Result<UserDto> {
         val searchQry = BasicDBObject();
         searchQry["email"] = userDto.email

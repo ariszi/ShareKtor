@@ -2,12 +2,12 @@ package zisis.aristofanis.controller.api.feature.user.domain.repoImpl
 
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.State
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserMongoDbDataSource
+import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserMongoDataSource
 import zisis.aristofanis.controller.api.feature.user.domain.models.UsersDto
 import zisis.aristofanis.controller.api.feature.user.domain.repoContracts.UserRepositoryContract
 import zisis.aristofanis.controller.api.feature.user.presentation.responses.UserResponse
 
-class UsersRepositoryImpl(private val dataSource: UserMongoDbDataSource) : UserRepositoryContract {
+class UsersRepositoryImpl(private val dataSource: UserMongoDataSource) : UserRepositoryContract {
 
     override suspend fun getUser(id: String): UserResponse {
         return when (val result = dataSource.getUserById(id)) {

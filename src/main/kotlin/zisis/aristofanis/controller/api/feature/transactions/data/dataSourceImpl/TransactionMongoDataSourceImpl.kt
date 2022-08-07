@@ -2,17 +2,17 @@ package zisis.aristofanis.controller.api.feature.transactions.data.dataSourceImp
 
 import org.litote.kmongo.coroutine.CoroutineCollection
 import zisis.aristofanis.controller.api.core.domain.Result
-import zisis.aristofanis.controller.api.feature.transactions.data.dataSourceContract.TransactionMongoDbDataSource
+import zisis.aristofanis.controller.api.feature.transactions.data.dataSourceContract.TransactionMongoDataSource
 import zisis.aristofanis.controller.api.feature.transactions.data.models.Transaction
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
 
 
-class TransactionMongoDbDataSourceImpl(private val transactionCollection: CoroutineCollection<Transaction>) :
-    TransactionMongoDbDataSource {
+class TransactionMongoDataSourceImpl(private val transactionCollection: CoroutineCollection<Transaction>) :
+    TransactionMongoDataSource {
     override suspend fun createTransaction(transactionDto: TransactionDto): Result<TransactionDto> {
         val insertResult = transactionCollection.insertOne(transactionDto.toDomain())
-        insertResult.insertedId.asString().toString()
+        insertResult.insertedId?.asString().toString()
         return if (insertResult.wasAcknowledged()) {
             Result.Success(transactionDto.copy(id = insertResult.insertedId?.toString() ?: ""))
         } else {
