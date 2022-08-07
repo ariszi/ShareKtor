@@ -9,7 +9,7 @@ data class TransactionReportDto(
     val contributorReport: String?,
     val recipientReport: String?
 ) {
-    fun toDomain(): TransactionReport? {
+    fun toMongoSchemaModel(): TransactionReport? {
         TODO("Not yet implemented")
     }
 }

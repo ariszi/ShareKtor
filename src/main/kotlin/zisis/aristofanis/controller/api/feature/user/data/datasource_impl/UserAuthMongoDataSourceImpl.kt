@@ -25,7 +25,7 @@ class UserAuthMongoDataSourceImpl(private val userCollection: CoroutineCollectio
         userCollection.find(searchQry).toResult().onSuccess {
             return UserExceptions.EmailIsAlreadyUsedException.toError()
         }
-        userCollection.insertOne(userDto.toDomain()).run {
+        userCollection.insertOne(userDto.toMongoSchemaModel()).run {
             return if (this.wasAcknowledged()) {
                 this.json
                 logger.debug(("Hello from module!" +  this.json) )

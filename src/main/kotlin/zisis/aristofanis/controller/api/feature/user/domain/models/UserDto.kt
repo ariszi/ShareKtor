@@ -15,7 +15,7 @@ data class UserDto(
     val age: Int? = null,
     val country: String? = null
 ) {
-    fun toDomain(): User =
+    fun toMongoSchemaModel(): User =
         User(
             name = this.name,
             age = this.age,

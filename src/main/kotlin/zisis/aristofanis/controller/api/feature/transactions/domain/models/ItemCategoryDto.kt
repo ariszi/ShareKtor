@@ -10,7 +10,7 @@ data class ItemCategoryDto(
     val categoryName: String,
     val categoryDescription: String,
 ) {
-    fun toDomain(): ItemCategory {
+    fun toMongoSchemaModel(): ItemCategory {
         return ItemCategory(
             category_name = categoryName,
             categoryDescription = categoryDescription

@@ -11,7 +11,7 @@ import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
 class TransactionMongoDataSourceImpl(private val transactionCollection: CoroutineCollection<Transaction>) :
     TransactionMongoDataSource {
     override suspend fun createTransaction(transactionDto: TransactionDto): Result<TransactionDto> {
-        val insertResult = transactionCollection.insertOne(transactionDto.toDomain())
+        val insertResult = transactionCollection.insertOne(transactionDto.toMongoSchemaModel())
         insertResult.insertedId?.asString().toString()
         return if (insertResult.wasAcknowledged()) {
             Result.Success(transactionDto.copy(id = insertResult.insertedId?.toString() ?: ""))

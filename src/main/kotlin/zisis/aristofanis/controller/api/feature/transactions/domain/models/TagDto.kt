@@ -5,15 +5,15 @@ import zisis.aristofanis.controller.api.feature.transactions.data.models.Tag
 
 @Serializable
 data class TagDto(
-    val id: String = "",
-    val name: String,
+    val id: String? = null,
+    val name: String? = null,
     val tagCategory: TagCategoryDto,
     val color: Int? = null
 ) {
-    fun toDomain(): Tag {
+    fun toMongoSchemaModel(): Tag {
         return Tag(
             name = name,
-            tag_category = tagCategory.toDomain(),
+            tag_category = tagCategory.toMongoSchemaModel(),
             color = color
         )
     }

@@ -11,10 +11,10 @@ data class ItemSubCategoryDto(
     val parentCategory: ItemCategoryDto,
     val subCategoryDescription: String,
 ) {
-    fun toDomain(): ItemSubCategory {
+    fun toMongoSchemaModel(): ItemSubCategory {
         return ItemSubCategory(
             sub_category_name = subCategoryName,
-            parent_category = parentCategory.toDomain(),
+            parent_category = parentCategory.toMongoSchemaModel(),
             sub_category_description = subCategoryDescription
         )
     }

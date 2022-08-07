@@ -1,6 +1,8 @@
 package zisis.aristofanis.controller.api.feature.transactions.presentation
 
+import io.ktor.server.application.*
 import io.ktor.server.auth.*
+import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import zisis.aristofanis.controller.api.VERSION_1
 import zisis.aristofanis.controller.api.feature.transactions.domain.repoContract.TransactionRepositoryContract
@@ -11,7 +13,9 @@ fun Route.transactionsRouting(repository: TransactionRepositoryContract){
     authenticate {
 
         route(VERSION_1){
-            post<CreateTransactionResource> {  }
+            post<CreateTransactionResource> {
+                call.respond(repository.createTransaction((it.toMongoSchemaModel())))
+            }
         }
 
     }

@@ -4,19 +4,19 @@ import kotlinx.serialization.Serializable
 import zisis.aristofanis.controller.api.feature.transactions.data.models.TransactedItem
 
 @Serializable
-data class TransactedItemDto(
+data class TransactionItemDto(
     val id: String?,
-    val category: ItemCategoryDto?,
+    val category: ItemCategoryDto? = null,
     val subCategory: ItemSubCategoryDto? = null,
     val itemDescription: String? = null,
-    val tags: List<TagDto>? = null
+    val tags: List<String>? = null
 ) {
-    fun toDomain(): TransactedItem {
+    fun toMongoSchemaModel(): TransactedItem {
         return TransactedItem(
-            category = category?.toDomain(),
-            sub_category = subCategory?.toDomain(),
+            category = category?.toMongoSchemaModel(),
+            sub_category = subCategory?.toMongoSchemaModel(),
             item_description = itemDescription,
-            tags = tags?.map { it.toDomain() } ?: emptyList()
+            tags = tags
         )
 
     }

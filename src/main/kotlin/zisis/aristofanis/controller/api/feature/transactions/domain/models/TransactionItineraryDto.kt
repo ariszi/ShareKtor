@@ -10,7 +10,7 @@ data class TransactionItineraryDto(
     val recipientStatus: String,
     val contributorStatus: String
 ) {
-    fun toDomain(): TransactionItinerary? {
+    fun toMongoSchemaModel(): TransactionItinerary? {
         return TransactionItinerary(
             status = toTransactionStatus(status),
             requestor_status = toParticipantStatus(requestorStatus),

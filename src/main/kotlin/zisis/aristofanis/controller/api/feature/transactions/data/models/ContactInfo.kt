@@ -4,7 +4,7 @@ import kotlinx.serialization.Serializable
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.ContactInfoDto
 
 @Serializable
-data class ContactInfo(val full_name: String?, val phone_number: String?, val email: String?) {
+data class ContactInfo(val user_id: String?, val full_name: String?, val phone_number: String?, val email: String?) {
     fun toDto(): ContactInfoDto {
         return ContactInfoDto(
             fullName = full_name,

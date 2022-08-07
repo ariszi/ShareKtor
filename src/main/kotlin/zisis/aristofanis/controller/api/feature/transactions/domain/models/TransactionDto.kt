@@ -8,7 +8,7 @@ data class TransactionDto(
     val id: String = "",
     val creatorsId: String,
     val recipientId: String? = null,
-    val item: TransactedItemDto,
+    val item: TransactionItemDto,
     val requestorsComment: String? = null,
     val requestorInfo: ContactInfoDto? = null,
     val recipientInfo: ContactInfoDto? = null,
@@ -17,32 +17,18 @@ data class TransactionDto(
     val transactionLocation: ShareLocationDto? = null,
     val report: TransactionReportDto? = null
 ) {
-    fun toDomain(): Transaction {
+    fun toMongoSchemaModel(): Transaction {
         return Transaction(
             creators_id = creatorsId,
             recipient_id = recipientId,
-            item = item.toDomain(),
+            item = item.toMongoSchemaModel(),
             requestors_comment = requestorsComment,
-            requestor_info = requestorInfo?.toDomain(),
-            recipient_info = recipientInfo?.toDomain(),
-            contributor_info = contributorInfo?.toDomain(),
-            handshake = handshake?.toDomain(),
-            transaction_location = transactionLocation?.toDomain(),
-            report = report?.toDomain()
+            requestor_info = requestorInfo?.toMongoSchemaModel(),
+            recipient_info = recipientInfo?.toMongoSchemaModel(),
+            contributor_info = contributorInfo?.toMongoSchemaModel(),
+            handshake = handshake?.toMongoSchemaModel(),
+            transaction_location = transactionLocation?.toMongoSchemaModel(),
+            report = report?.toMongoSchemaModel()
         )
     }
 }
-
-
-//{
-//    fun toDto(): TransactedItemDto {
-//        return TransactedItemDto(
-//            id = id,
-//            category = category,
-//            subCategory = subCategory,
-//            itemDescription = itemDescription,
-//            tags = tags
-//        )
-//
-//    }
-//}

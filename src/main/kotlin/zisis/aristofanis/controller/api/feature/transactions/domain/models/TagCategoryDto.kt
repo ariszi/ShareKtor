@@ -5,7 +5,7 @@ import zisis.aristofanis.controller.api.feature.transactions.data.models.TagCate
 
 @Serializable
 data class TagCategoryDto(val name: String, val color: Int? = null) {
-    fun toDomain(): TagCategory {
+    fun toMongoSchemaModel(): TagCategory {
         return TagCategory(name, color)
     }
 }

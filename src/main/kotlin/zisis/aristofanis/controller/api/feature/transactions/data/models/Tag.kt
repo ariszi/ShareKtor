@@ -9,7 +9,7 @@ import zisis.aristofanis.controller.api.feature.transactions.domain.models.TagDt
 @Serializable
 data class Tag(
     @BsonId val id: Id<Tag>? = null,
-    val name: String,
+    val name: String? = null,
     val tag_category: TagCategory,
     val color: Int? = null
 ) {

@@ -5,8 +5,8 @@ import zisis.aristofanis.controller.api.feature.user.data.models.Users
 
 @Serializable
 data class UsersDto(val users: List<UserDto>)  {
-    fun toDomain(): Users =
+    fun toMongoSchemaModel(): Users =
         Users(
-            users = this.users.map { it.toDomain() }
+            users = this.users.map { it.toMongoSchemaModel() }
         )
 }
