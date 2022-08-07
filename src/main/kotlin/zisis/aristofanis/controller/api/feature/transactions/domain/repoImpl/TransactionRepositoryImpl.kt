@@ -3,15 +3,14 @@ package zisis.aristofanis.controller.api.feature.transactions.domain.repoImpl
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.presentation.responses.SimpleResponse
 import zisis.aristofanis.controller.api.core.presentation.responses.State
-import zisis.aristofanis.controller.api.feature.transactions.data.dataSourceContract.TransactionMongoDataSource
+import zisis.aristofanis.controller.api.feature.transactions.data.datasource_contract.TransactionMongoDataSource
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto
 import zisis.aristofanis.controller.api.feature.transactions.domain.repoContract.TransactionRepositoryContract
 
 
 class TransactionRepositoryImpl(
     private val transactionMongoDataSource: TransactionMongoDataSource
-) :
-    TransactionRepositoryContract {
+) : TransactionRepositoryContract {
     override suspend fun createTransaction(transactionDto: TransactionDto): SimpleResponse {
         return when (transactionMongoDataSource.createTransaction(transactionDto)) {
             is Result.Success -> SimpleResponse(message = "Transaction created successfully")

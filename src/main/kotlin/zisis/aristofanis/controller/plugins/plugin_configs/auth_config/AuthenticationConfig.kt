@@ -1,4 +1,4 @@
-package zisis.aristofanis.controller.plugins.pluginconfigs.authConfig
+package zisis.aristofanis.controller.plugins.plugin_configs.auth_config
 
 import io.ktor.http.*
 import io.ktor.server.auth.*
@@ -6,7 +6,7 @@ import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.token.JWTController
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserMongoDataSource
+import zisis.aristofanis.controller.api.feature.user.data.datasource_contract.UserMongoDataSource
 import zisis.aristofanis.controller.api.feature.user.presentation.models.UserPrincipal
 
 fun AuthenticationConfig.authenticationConfig(jwtController: JWTController, dataSource: UserMongoDataSource) {

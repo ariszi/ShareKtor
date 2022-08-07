@@ -6,8 +6,8 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import zisis.aristofanis.controller.api.VERSION_1
 import zisis.aristofanis.controller.api.feature.user.domain.repoContracts.UserAuthRepositoryContract
-import zisis.aristofanis.controller.api.feature.user.presentation.resources_models.CreateUserResource
-import zisis.aristofanis.controller.api.feature.user.presentation.resources_models.UserCredentials
+import zisis.aristofanis.controller.api.feature.user.presentation.resources.CreateUserResource
+import zisis.aristofanis.controller.api.feature.user.presentation.resources.UserCredentials
 
 
 fun Route.authRouting(repository: UserAuthRepositoryContract) {

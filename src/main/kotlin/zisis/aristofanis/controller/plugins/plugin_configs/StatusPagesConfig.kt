@@ -1,10 +1,9 @@
-package zisis.aristofanis.controller.plugins.pluginconfigs
+package zisis.aristofanis.controller.plugins.plugin_configs
 
 import io.ktor.http.*
 import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.response.*
 import zisis.aristofanis.controller.api.core.domain.SimpleError
-import zisis.aristofanis.controller.api.core.domain.State
 import zisis.aristofanis.controller.api.core.presentation.models.FailureResponse
 
 fun StatusPagesConfig.configStatusPages() {

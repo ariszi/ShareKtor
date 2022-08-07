@@ -1,8 +1,8 @@
-package zisis.aristofanis.controller.api.feature.transactions.data.dataSourceImpl
+package zisis.aristofanis.controller.api.feature.transactions.data.datasource_impl
 
 import org.litote.kmongo.coroutine.CoroutineCollection
 import zisis.aristofanis.controller.api.core.domain.Result
-import zisis.aristofanis.controller.api.feature.transactions.data.dataSourceContract.TransactionMongoDataSource
+import zisis.aristofanis.controller.api.feature.transactions.data.datasource_contract.TransactionMongoDataSource
 import zisis.aristofanis.controller.api.feature.transactions.data.models.Transaction
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions

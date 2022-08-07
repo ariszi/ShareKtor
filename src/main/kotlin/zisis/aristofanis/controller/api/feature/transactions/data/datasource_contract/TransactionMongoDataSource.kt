@@ -1,4 +1,4 @@
-package zisis.aristofanis.controller.api.feature.transactions.data.dataSourceContract
+package zisis.aristofanis.controller.api.feature.transactions.data.datasource_contract
 
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto

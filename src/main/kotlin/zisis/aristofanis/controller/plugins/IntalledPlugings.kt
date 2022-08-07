@@ -9,10 +9,10 @@ import io.ktor.server.plugins.statuspages.*
 import io.ktor.server.resources.*
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import zisis.aristofanis.controller.api.core.domain.token.JWTController
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl.UserMongoDataSourceImpl
+import zisis.aristofanis.controller.api.feature.user.data.datasource_impl.UserMongoDataSourceImpl
 import zisis.aristofanis.controller.api.feature.user.data.models.User
-import zisis.aristofanis.controller.plugins.pluginconfigs.authConfig.authenticationConfig
-import zisis.aristofanis.controller.plugins.pluginconfigs.configStatusPages
+import zisis.aristofanis.controller.plugins.plugin_configs.auth_config.authenticationConfig
+import zisis.aristofanis.controller.plugins.plugin_configs.configStatusPages
 
 
 fun Application.configPlugIns(database: CoroutineDatabase) {

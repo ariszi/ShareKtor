@@ -1,4 +1,4 @@
-package zisis.aristofanis.controller.plugins.pluginconfigs
+package zisis.aristofanis.controller.plugins.plugin_configs
 
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import org.litote.kmongo.coroutine.coroutine

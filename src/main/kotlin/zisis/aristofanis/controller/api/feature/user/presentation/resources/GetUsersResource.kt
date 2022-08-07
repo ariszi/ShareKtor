@@ -1,8 +1,8 @@
-package zisis.aristofanis.controller.api.feature.user.presentation.resources_models
+package zisis.aristofanis.controller.api.feature.user.presentation.resources
 
 import io.ktor.resources.*
 import kotlinx.serialization.Serializable
 
 @Serializable
 @Resource(path = "/users")
-class GetUsers
+class GetUsersResource

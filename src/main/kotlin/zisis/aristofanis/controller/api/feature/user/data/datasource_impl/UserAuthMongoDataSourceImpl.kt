@@ -1,4 +1,4 @@
-package zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl
+package zisis.aristofanis.controller.api.feature.user.data.datasource_impl
 
 import com.mongodb.BasicDBObject
 import org.litote.kmongo.coroutine.CoroutineCollection
@@ -9,7 +9,7 @@ import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.mapError
 import zisis.aristofanis.controller.api.core.domain.onSuccess
 import zisis.aristofanis.controller.api.core.domain.validateMap
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserAuthMongoDataSource
+import zisis.aristofanis.controller.api.feature.user.data.datasource_contract.UserAuthMongoDataSource
 import zisis.aristofanis.controller.api.feature.user.data.models.User
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
 import zisis.aristofanis.controller.api.feature.user.domain.models.CredentialsDto

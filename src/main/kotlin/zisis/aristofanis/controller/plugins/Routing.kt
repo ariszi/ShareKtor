@@ -4,8 +4,8 @@ import io.ktor.server.application.*
 import io.ktor.server.routing.*
 import org.litote.kmongo.coroutine.CoroutineDatabase
 import zisis.aristofanis.controller.api.core.domain.token.JWTController
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl.UserAuthMongoDataSourceImpl
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceImpl.UserMongoDataSourceImpl
+import zisis.aristofanis.controller.api.feature.user.data.datasource_impl.UserAuthMongoDataSourceImpl
+import zisis.aristofanis.controller.api.feature.user.data.datasource_impl.UserMongoDataSourceImpl
 import zisis.aristofanis.controller.api.feature.user.data.models.User
 import zisis.aristofanis.controller.api.feature.user.domain.repoImpl.UsersAuthRepositoryImpl
 import zisis.aristofanis.controller.api.feature.user.domain.repoImpl.UsersRepositoryImpl

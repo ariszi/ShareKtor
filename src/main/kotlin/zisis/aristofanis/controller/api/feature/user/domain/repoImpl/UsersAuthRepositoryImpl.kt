@@ -3,8 +3,8 @@ package zisis.aristofanis.controller.api.feature.user.domain.repoImpl
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.State
 import zisis.aristofanis.controller.api.core.domain.token.JWTController
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserAuthMongoDataSource
-import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserMongoDataSource
+import zisis.aristofanis.controller.api.feature.user.data.datasource_contract.UserAuthMongoDataSource
+import zisis.aristofanis.controller.api.feature.user.data.datasource_contract.UserMongoDataSource
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
 import zisis.aristofanis.controller.api.feature.user.domain.models.CredentialsDto
 import zisis.aristofanis.controller.api.feature.user.domain.models.UserDto
