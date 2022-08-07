@@ -1,4 +1,6 @@
-package zisis.aristofanis.controller.api.core.domain
+package zisis.aristofanis.controller.api.core.presentation.responses
+
+import zisis.aristofanis.controller.api.core.domain.Result
 
 /**
  * Response model to expose in API response

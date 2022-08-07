@@ -1,19 +1,22 @@
 package zisis.aristofanis.controller.api.feature.transactions.domain.repoImpl
 
-import org.litote.kmongo.coroutine.CoroutineCollection
+import zisis.aristofanis.controller.api.core.domain.Result
+import zisis.aristofanis.controller.api.core.presentation.responses.SimpleResponse
+import zisis.aristofanis.controller.api.core.presentation.responses.State
 import zisis.aristofanis.controller.api.feature.transactions.data.dataSourceContract.TransactionMongoDataSource
-import zisis.aristofanis.controller.api.feature.transactions.data.models.Transaction
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto
 import zisis.aristofanis.controller.api.feature.transactions.domain.repoContract.TransactionRepositoryContract
 
 
 class TransactionRepositoryImpl(
-    private val transactionCollection: CoroutineCollection<Transaction>,
     private val transactionMongoDataSource: TransactionMongoDataSource
 ) :
     TransactionRepositoryContract {
-    override suspend fun createTransaction(transactionDto: TransactionDto) {
-        TODO("Not yet implemented")
+    override suspend fun createTransaction(transactionDto: TransactionDto): SimpleResponse {
+        return when (transactionMongoDataSource.createTransaction(transactionDto)) {
+            is Result.Success -> SimpleResponse(message = "Transaction created successfully")
+            is Result.Error -> SimpleResponse(status = State.FAILED, message = "Error creating transaction")
+        }
     }
 
     override suspend fun updateTransactionStatus() {

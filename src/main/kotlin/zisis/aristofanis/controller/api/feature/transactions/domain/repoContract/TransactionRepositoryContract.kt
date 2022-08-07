@@ -1,10 +1,11 @@
 package zisis.aristofanis.controller.api.feature.transactions.domain.repoContract
 
+import zisis.aristofanis.controller.api.core.presentation.responses.SimpleResponse
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto
 
 interface TransactionRepositoryContract {
 
-    suspend fun createTransaction(transactionDto: TransactionDto)
+    suspend fun createTransaction(transactionDto: TransactionDto): SimpleResponse
 
     suspend fun updateTransactionStatus()
 

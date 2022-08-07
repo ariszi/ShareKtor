@@ -1,7 +1,7 @@
 package zisis.aristofanis.controller.api.feature.user.domain.repoImpl
 
 import zisis.aristofanis.controller.api.core.domain.Result
-import zisis.aristofanis.controller.api.core.domain.State
+import zisis.aristofanis.controller.api.core.presentation.responses.State
 import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserMongoDataSource
 import zisis.aristofanis.controller.api.feature.user.domain.models.UsersDto
 import zisis.aristofanis.controller.api.feature.user.domain.repoContracts.UserRepositoryContract

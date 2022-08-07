@@ -2,9 +2,9 @@ package zisis.aristofanis.controller.api.feature.user.domain
 
 import zisis.aristofanis.controller.api.core.data.MappableError
 import zisis.aristofanis.controller.api.core.data.MappableResponse
-import zisis.aristofanis.controller.api.core.domain.SimpleError
 import zisis.aristofanis.controller.api.core.domain.Result
-import zisis.aristofanis.controller.api.core.domain.State
+import zisis.aristofanis.controller.api.core.domain.SimpleError
+import zisis.aristofanis.controller.api.core.presentation.responses.State
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions.ErrorType.ERROR_CREATING_USER
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions.ErrorType.ERROR_NAME_IS_EMPTY
 import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions.ErrorType.ERROR_NAME_IS_TOO_BIG

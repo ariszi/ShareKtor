@@ -1,4 +1,4 @@
-package zisis.aristofanis.controller.api.core.domain
+package zisis.aristofanis.controller.api.core.presentation.responses
 
 import io.ktor.http.*
 
