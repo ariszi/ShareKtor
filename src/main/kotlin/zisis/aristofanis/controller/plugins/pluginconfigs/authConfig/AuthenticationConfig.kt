@@ -6,6 +6,7 @@ import io.ktor.server.auth.jwt.*
 import io.ktor.server.response.*
 import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.core.domain.token.JWTController
+import zisis.aristofanis.controller.api.feature.user.data.dataSourceContract.UserMongoDbDataSource
 import zisis.aristofanis.controller.api.feature.user.presentation.models.UserPrincipal
 
 fun AuthenticationConfig.authenticationConfig(jwtController: JWTController, dataSource: UserMongoDbDataSource) {

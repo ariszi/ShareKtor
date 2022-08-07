@@ -1,52 +1,60 @@
 package zisis.aristofanis.controller.api.feature.transactions.data.dataSourceImpl
 
 import org.litote.kmongo.coroutine.CoroutineCollection
+import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.feature.transactions.data.dataSourceContract.TransactionMongoDbDataSource
+import zisis.aristofanis.controller.api.feature.transactions.data.models.Transaction
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto
-import zisis.aristofanis.controller.api.feature.user.data.models.User
+import zisis.aristofanis.controller.api.feature.user.domain.UserExceptions
 
 
-class TransactionMongoDbDataSourceImpl(private val userCollection: CoroutineCollection<User>) :
+class TransactionMongoDbDataSourceImpl(private val transactionCollection: CoroutineCollection<Transaction>) :
     TransactionMongoDbDataSource {
-    override fun createTransaction(): Result<TransactionDto> {
+    override suspend fun createTransaction(transactionDto: TransactionDto): Result<TransactionDto> {
+        val insertResult = transactionCollection.insertOne(transactionDto.toDomain())
+        insertResult.insertedId.asString().toString()
+        return if (insertResult.wasAcknowledged()) {
+            Result.Success(transactionDto.copy(id = insertResult.insertedId?.toString() ?: ""))
+        } else {
+            UserExceptions.UserCreationException.toError()
+        }
+    }
+
+    override suspend fun updateTransactionStatus(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
 
-    override fun updateTransactionStatus(): Result<TransactionDto> {
+    override suspend fun claimTransactionAsContributor(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
 
-    override fun claimTransactionAsContributor(): Result<TransactionDto> {
+    override suspend fun cancelTransaction(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
 
-    override fun cancelTransaction(): Result<TransactionDto> {
+    override suspend fun reportTransaction(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
 
-    override fun reportTransaction(): Result<TransactionDto> {
+    override suspend fun addContactInfoToTransaction(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
 
-    override fun addContactInfoToTransaction(): Result<TransactionDto> {
+    override suspend fun createTransactionShareArea(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
 
-    override fun createTransactionShareArea(): Result<TransactionDto> {
+    override suspend fun updateItem(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
 
-    override fun updateItem(): Result<TransactionDto> {
+    override suspend fun addCommentToTransaction(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
 
-    override fun addCommentToTransaction(): Result<TransactionDto> {
+    override suspend fun updateHandshake(): Result<TransactionDto> {
         TODO("Not yet implemented")
     }
-
-    override fun updateHandshake(): Result<TransactionDto> {
-        TODO("Not yet implemented")
-    }
-
-
 }
+
+

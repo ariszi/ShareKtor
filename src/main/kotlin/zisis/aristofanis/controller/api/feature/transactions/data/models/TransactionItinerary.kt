@@ -1,18 +1,29 @@
 package zisis.aristofanis.controller.api.feature.transactions.data.models
 
 import kotlinx.serialization.Serializable
+import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionItineraryDto
 
 @Serializable
 data class TransactionItinerary(
     val status: TransactionStatus = TransactionStatus.INVALID,
-    val requestorStatus: ParticipantsStatus,
-    val recipientStatus: ParticipantsStatus,
-    val contributorStatus: ParticipantsStatus
+    val requestor_status: ParticipantsStatus,
+    val recipient_status: ParticipantsStatus,
+    val contributor_status: ParticipantsStatus
 ) {
+    fun toDto(): TransactionItineraryDto? {
+        return TransactionItineraryDto(
+            status = status.toString(),
+            requestorStatus = requestor_status.toString(),
+            recipientStatus = recipient_status.toString(),
+            contributorStatus = contributor_status.toString()
+        )
+    }
+
     enum class ParticipantsStatus {
         INTERESTED,
         AGREED,
-        DECLINED
+        DECLINED,
+        DEFAULT
     }
 
     enum class TransactionStatus {
@@ -22,6 +33,7 @@ data class TransactionItinerary(
         IN_PROGRESS,
         CANCELED,
         EXPIRED,
-        INVALID
+        INVALID,
+        DEFAULT
     }
 }

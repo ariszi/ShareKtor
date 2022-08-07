@@ -1,28 +1,29 @@
 package zisis.aristofanis.controller.api.feature.transactions.data.dataSourceContract
 
+import zisis.aristofanis.controller.api.core.domain.Result
 import zisis.aristofanis.controller.api.feature.transactions.domain.models.TransactionDto
 
 interface TransactionMongoDbDataSource {
 
-    fun createTransaction(): Result<TransactionDto>
+   suspend fun createTransaction(transactionDto: TransactionDto): Result<TransactionDto>
 
-    fun updateTransactionStatus(): Result<TransactionDto>
+    suspend fun updateTransactionStatus(): Result<TransactionDto>
 
-    fun claimTransactionAsContributor(): Result<TransactionDto>
+    suspend  fun claimTransactionAsContributor(): Result<TransactionDto>
 
-    fun cancelTransaction(): Result<TransactionDto>
+    suspend  fun cancelTransaction(): Result<TransactionDto>
 
-    fun reportTransaction(): Result<TransactionDto>
+    suspend  fun reportTransaction(): Result<TransactionDto>
 
-    fun addContactInfoToTransaction(): Result<TransactionDto>
+    suspend fun addContactInfoToTransaction(): Result<TransactionDto>
 
-    fun createTransactionShareArea(): Result<TransactionDto>
+    suspend  fun createTransactionShareArea(): Result<TransactionDto>
 
-    fun updateItem(): Result<TransactionDto>
+    suspend fun updateItem(): Result<TransactionDto>
 
-    fun addCommentToTransaction(): Result<TransactionDto>
+    suspend  fun addCommentToTransaction(): Result<TransactionDto>
 
-    fun updateHandshake(): Result<TransactionDto>
+    suspend  fun updateHandshake(): Result<TransactionDto>
 
 
 }
